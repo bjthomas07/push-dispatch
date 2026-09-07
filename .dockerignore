@@ -1,0 +1,8 @@
+*
+!go.mod
+!go.sum
+!push/**
+!scheduler/**
+!api/**
+!cmd/**
+!Dockerfile

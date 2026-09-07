@@ -1,0 +1,13 @@
+The initial implementation was extracted and generalized from the author's mobile
+applications. Application assets, credentials, user data, and Git history are not
+included.
+
+Dependencies retain their upstream licenses. The bundled Gradle wrapper is covered
+by Apache License 2.0; its license and notices are in third_party/gradle/.
+
+The repository name bjthomas07/push-dispatch is a descriptive, owner-scoped
+identifier. No third-party logos are included. Third-party product names are used
+only to identify compatibility or document history; no affiliation or endorsement
+is implied. A preliminary web search found existing uses of “Push Dispatch,” and
+“PushRelay” was rejected because an existing notification service uses it. This
+name has not received formal trademark clearance.

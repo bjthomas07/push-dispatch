@@ -1,0 +1,27 @@
+[tools]
+go = "1.26.6"
+java = "temurin-17.0.18+8"
+
+[tasks.test]
+run = "go test -race ./..."
+[tasks.vet]
+run = "go vet ./..."
+[tasks.build]
+run = "go build -o bin/push-dispatch ./cmd/push-dispatch"
+[tasks.fmt]
+run = "gofmt -w push scheduler api cmd"
+[tasks.android-test]
+dir = "android"
+run = "./gradlew :notifications-core:testDebugUnitTest :notifications-firebase:testDebugUnitTest"
+[tasks.android-build]
+dir = "android"
+run = "./gradlew :notifications-core:assembleRelease :notifications-firebase:assembleRelease"
+[tasks.audit]
+run = "go run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./..."
+
+[tasks.apple-test]
+run = "bash scripts/apple-test.sh"
+[tasks.test-emulator]
+run = "mise exec java@21.0.2 -- python3 scripts/test-emulator.py"
+[tasks.audit-native]
+run = "python3 scripts/audit-native.py"

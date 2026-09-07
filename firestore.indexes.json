@@ -1,0 +1,59 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "pushSchedules",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "state",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "shard",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "availableAt",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "users",
+      "fieldPath": "pushInstallations",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "message",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "completed",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "dueAt",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "availableAt",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "updatedAt",
+      "indexes": []
+    },
+    {
+      "collectionGroup": "pushSchedules",
+      "fieldPath": "leaseToken",
+      "indexes": []
+    }
+  ]
+}

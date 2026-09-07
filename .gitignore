@@ -1,0 +1,24 @@
+# Local build state and credentials
+.DS_Store
+.env
+.env.*
+!.env.example
+*.p8
+*.pem
+*.key
+*service-account*.json
+google-services.json
+GoogleService-Info.plist
+.build/
+.gradle/
+build/
+local.properties
+bin/
+*.xcresult
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+# Standalone tool output
+/push-dispatch
+*.log
+.swiftpm/

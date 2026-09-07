@@ -1,0 +1,12 @@
+{
+  "id": "morning",
+  "recipientId": "replace-with-firebase-auth-uid",
+  "daily": { "localTime": 830, "timezone": "America/New_York" },
+  "message": {
+    "title": "A moment for you",
+    "body": "Your daily reminder is ready.",
+    "data": { "deep_link": "example://today", "content_id": "daily" },
+    "apple": { "sound": "default" },
+    "android": { "channelId": "reminders", "sound": "default" }
+  }
+}
