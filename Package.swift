@@ -26,7 +26,7 @@ let package = Package(
     targets: [
         .target(
             name: "PushDispatchCore",
-            path: "apple/Sources/PushDispatchCore",
+            path: "ios/Sources/PushDispatchCore",
             resources: [
                 .process("PrivacyInfo.xcprivacy"),
             ]
@@ -40,12 +40,12 @@ let package = Package(
                     package: "firebase-ios-sdk"
                 ),
             ],
-            path: "apple/Sources/PushDispatchFirebase"
+            path: "ios/Sources/PushDispatchFirebase"
         ),
         .testTarget(
             name: "PushDispatchCoreTests",
             dependencies: ["PushDispatchCore"],
-            path: "apple/Tests/PushDispatchCoreTests"
+            path: "ios/Tests/PushDispatchCoreTests"
         ),
         .testTarget(
             name: "PushDispatchFirebaseTests",
@@ -53,7 +53,7 @@ let package = Package(
                 "PushDispatchCore",
                 "PushDispatchFirebase",
             ],
-            path: "apple/Tests/PushDispatchFirebaseTests"
+            path: "ios/Tests/PushDispatchFirebaseTests"
         ),
     ],
     swiftLanguageModes: [.v5]

@@ -14,13 +14,13 @@ mise install java@21.0.2
 mise run test-emulator
 mise run android-test
 mise run android-build
-mise run apple-test
+mise run ios-test
 mise run audit
 mise run audit-native
 ```
 
 Android requires SDK platform 36 and build-tools 35.0.0, with `ANDROID_HOME` set.
-Apple tests require Xcode and an iOS simulator; set `IOS_DESTINATION` if needed.
+iOS tests require Xcode and an iOS simulator; set `IOS_DESTINATION` if needed.
 Emulator tests use only `demo-push-dispatch` and skip in the ordinary Go suite when
 `FIRESTORE_EMULATOR_HOST` is absent. `test-emulator` starts an isolated local emulator.
 The Go suite also compiles `examples/send` and its emulator cases verify that

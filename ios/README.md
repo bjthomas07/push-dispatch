@@ -1,4 +1,4 @@
-# Apple
+# iOS
 
 Swift Package Manager products: `PushDispatchCore` and `PushDispatchFirebase`.
 iOS 15+, Swift tools 6.1; Firebase Messaging is pinned to **12.16.0**. App workspaces
@@ -14,7 +14,7 @@ commit until release tags are published:
 )
 ```
 
-The root Swift manifest references the sources in `apple/`; Go and Swift consumers
+The root Swift manifest references the sources in `ios/`; Go and Swift consumers
 can both use this repository without vendoring a second checkout.
 
 Add both products to the app target. The app owns its Firebase configuration,
@@ -88,7 +88,7 @@ to a project-owned service; event callbacks belong to the app.
 
 ```sh
 # From repository root; override for an installed simulator as needed
-IOS_DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' mise run apple-test
+IOS_DESTINATION='platform=iOS Simulator,name=iPhone 17 Pro' mise run ios-test
 ```
 
 The package tests validate lifecycle and callback behavior. Production APNs/FCM

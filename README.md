@@ -32,7 +32,7 @@ The [quickstart](docs/quickstart.md) covers credentials, registration, and expec
 results. `serve` runs the device API; `tick` processes due schedules. A recurring
 worker is needed to deliver reminders when this terminal is closed.
 
-[Runnable Go example](examples/send/main.go) · [Usage and JSON](docs/usage.md) · [Apple](apple/README.md) ·
+[Runnable Go example](examples/send/main.go) · [Usage and JSON](docs/usage.md) · [iOS](ios/README.md) ·
 [Android](android/README.md) · [GCP deployment](docs/gcp.md) ·
 [Troubleshooting](docs/troubleshooting.md) ·
 [Storage and delivery guarantees](docs/architecture.md) · [Contributing](CONTRIBUTING.md)

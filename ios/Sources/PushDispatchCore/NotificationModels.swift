@@ -14,7 +14,7 @@ public enum NotificationPlatform: String, Codable, Sendable {
     case android
 }
 
-/// Backend-facing permission state. Provisional and ephemeral Apple permission
+/// Backend-facing permission state. Provisional and ephemeral iOS permission
 /// both map to `granted`; unsupported/future states map to `unknown`.
 public enum NotificationPermission: String, Codable, Sendable {
     case granted

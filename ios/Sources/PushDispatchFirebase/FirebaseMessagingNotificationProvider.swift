@@ -82,7 +82,7 @@ final class FirebaseMessagingRegistrationTargetWaiter {
     }
 }
 
-/// Firebase Messaging adapter for Apple platforms. It owns provider-specific
+/// Firebase Messaging adapter for iOS. It owns provider-specific
 /// registration and translates callbacks into the Core target/event contract.
 @MainActor
 public final class FirebaseMessagingNotificationProvider: NSObject {

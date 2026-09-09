@@ -6,4 +6,4 @@ if [[ -z "${IOS_DESTINATION:-}" ]]; then
   IOS_DESTINATION="platform=iOS Simulator,id=$push_simulator_id"
 fi
 xcodebuild test -scheme PushDispatch-Package -destination "$IOS_DESTINATION" \
-  -derivedDataPath apple/.build/xcode -disableAutomaticPackageResolution -quiet
+  -derivedDataPath ios/.build/xcode -disableAutomaticPackageResolution -quiet

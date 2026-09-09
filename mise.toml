@@ -22,8 +22,8 @@ run = "./gradlew :notifications-core:assembleRelease :notifications-firebase:ass
 [tasks.audit]
 run = "go run golang.org/x/vuln/cmd/govulncheck@v1.1.4 ./..."
 
-[tasks.apple-test]
-run = "bash scripts/apple-test.sh"
+[tasks.ios-test]
+run = "bash scripts/ios-test.sh"
 [tasks.test-emulator]
 run = "mise exec java@21.0.2 -- python3 scripts/test-emulator.py"
 [tasks.audit-native]

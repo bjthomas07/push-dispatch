@@ -13,7 +13,7 @@ Firebase CLI, curl 7.76+ and jq. Run the shell blocks in **Bash** on macOS or Li
 In the Firebase console, create or select your test project, enable Firebase Auth
 with your app's sign-in provider, and create a Firestore Native `(default)` database.
 Register the Android/iOS app with that same project. Follow the
-[Android](../android/README.md) or [Apple](../apple/README.md) integration guide.
+[Android](../android/README.md) or [iOS](../ios/README.md) integration guide.
 
 Before sending, sign in on the device and grant notification permission. Android
 must create a notification channel named `reminders`. For iOS, configure APNs in
@@ -122,7 +122,7 @@ values. A gcloud access token, Firebase custom token, or raw APNs token will not
 work in their place. [Getting a Firebase ID token](https://firebase.google.com/docs/auth/admin/verify-id-tokens#retrieve_id_tokens_on_clients).
 
 For iOS using Messaging FIDs, change `targetType` below to `fid` and set
-`PUSH_PLATFORM=ios`; supply the Messaging-registered FID described in the Apple
+`PUSH_PLATFORM=ios`; supply the Messaging-registered FID described in the iOS
 guide. The following example uses an FCM registration token.
 
 Enter values interactively so they are not literal commands in shell history:

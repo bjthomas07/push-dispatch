@@ -3,8 +3,8 @@
 These commands deploy into **your** project. The repository does not contain cloud
 credentials and development tests use an emulator. A Firebase-enabled GCP project,
 Firestore Native database, Firebase Auth, Android/iOS Firebase app registrations,
-and billing for Cloud Run/Cloud Scheduler are prerequisites. Configure the Apple
-APNs key in Firebase before testing iOS delivery.
+and billing for Cloud Run/Cloud Scheduler are prerequisites. Configure the APNs key
+in Firebase before testing iOS delivery.
 
 ```sh
 export PUSH_PROJECT=your-project

@@ -98,7 +98,7 @@ Registration body (identical wire keys on both platforms):
 }
 ```
 
-For Apple FID mode use `targetType: "fid"`, `platform: "ios"` and the FID returned
+For iOS FID mode use `targetType: "fid"`, `platform: "ios"` and the FID returned
 by Firebase Messaging registration. Permission is `granted`, `denied`, or `unknown`.
 A bare Firebase Installations identifier is insufficient unless Messaging has
 registered it for delivery.
