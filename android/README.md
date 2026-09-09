@@ -1,7 +1,7 @@
 # Android
 
 Two source modules: `notifications-core` and `notifications-firebase`. Android API
-26+, compile SDK 36, Java 17, Kotlin 2.3.21, AGP 8.13.2, Firebase Messaging 25.0.1.
+23+, compile SDK 36, Java 17, Kotlin 2.3.21, AGP 8.13.2, Firebase Messaging 25.1.2.
 The included standalone Gradle build has exact pins and dependency lockfiles.
 No Maven coordinates have been published.
 

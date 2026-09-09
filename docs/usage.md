@@ -37,6 +37,15 @@ Imports: `github.com/bjthomas07/push-dispatch/push` and
 addresses out of logs. Only unregistered targets should be retired automatically;
 a permanent payload/configuration error does not prove a token is invalid.
 
+Existing Firestore layouts can set `pushstore.Config.UserDocument` to resolve each
+recipient's push-state document and `OwnersCollection` to select the ownership
+collection. The resolver applies to registration, heartbeat, delivery lookup, and
+cleanup; updates preserve unrelated fields. With `CreateUsers: true`, only the
+resolved document is created, including when its parent account document is absent.
+Use `scheduler/firestore.NewWithCollection` for an explicit schedule collection.
+The default app-relative paths continue to work unchanged. Apply server-only access
+rules and the required indexes to custom paths too.
+
 ## CLI
 
 All commands accept `--project PROJECT --app APP`, or the environment variables

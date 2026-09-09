@@ -32,8 +32,12 @@ type AppDocumentFunc func(context.Context) *firestore.DocumentRef
 
 type Config struct {
 	// CreateUsers permits authenticated first-registration to create a minimal user document.
-	CreateUsers              bool
-	AppDocument              AppDocumentFunc
+	CreateUsers bool
+	AppDocument AppDocumentFunc
+	// UserDocument and OwnersCollection override the default app-relative paths.
+	// Use them when an existing application keeps push state in a separate document.
+	UserDocument             func(context.Context, string) *firestore.DocumentRef
+	OwnersCollection         *firestore.CollectionRef
 	DeleteRequestsCollection string
 	DeleteRequestStatusField string
 	BlockedDeleteStatuses    map[string]bool
@@ -43,6 +47,8 @@ type Store struct {
 	createUsers              bool
 	fs                       *firestore.Client
 	appDocument              AppDocumentFunc
+	userDocument             func(context.Context, string) *firestore.DocumentRef
+	owners                   *firestore.CollectionRef
 	deleteRequestsCollection string
 	deleteRequestStatusField string
 	blockedDeleteStatuses    map[string]bool
@@ -51,6 +57,7 @@ type Store struct {
 func New(fs *firestore.Client, config Config) *Store {
 	return &Store{createUsers: config.CreateUsers,
 		fs: fs, appDocument: config.AppDocument,
+		userDocument: config.UserDocument, owners: config.OwnersCollection,
 		deleteRequestsCollection: config.DeleteRequestsCollection,
 		deleteRequestStatusField: config.DeleteRequestStatusField,
 		blockedDeleteStatuses:    config.BlockedDeleteStatuses,
@@ -67,10 +74,16 @@ type ownerDocument struct {
 }
 
 func (s *Store) userDoc(ctx context.Context, uid string) *firestore.DocumentRef {
+	if s.userDocument != nil {
+		return s.userDocument(ctx, uid)
+	}
 	return s.appDocument(ctx).Collection(UsersCollection).Doc(uid)
 }
 
 func (s *Store) ownerCollection(ctx context.Context) *firestore.CollectionRef {
+	if s.owners != nil {
+		return s.owners
+	}
 	return s.appDocument(ctx).Collection(OwnersCollection)
 }
 

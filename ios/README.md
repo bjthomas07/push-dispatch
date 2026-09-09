@@ -1,7 +1,7 @@
 # iOS
 
 Swift Package Manager products: `PushDispatchCore` and `PushDispatchFirebase`.
-iOS 15+, Swift tools 6.1; Firebase Messaging is pinned to **12.16.0**. App workspaces
+iOS 15+, Swift tools 6.1; Firebase Messaging is pinned to **12.18.0**. App workspaces
 must resolve the same Firebase version. Commit their `Package.resolved` too.
 
 Add the public repository directly in Xcode or Package.swift. Pin a reviewed

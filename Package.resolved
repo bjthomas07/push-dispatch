@@ -1,5 +1,5 @@
 {
-  "originHash" : "6f6ce05700261b9b02919ab0bfbcfd38ce6123fb322844d00e5d8890b784f7f9",
+  "originHash" : "9eed64595b914d2993c685838f6b3ceee1813c6bce5a576c1ee8b43a4c51861f",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk",
       "state" : {
-        "revision" : "9ab4a7e6e5d6d3df2a2aa002a11d25e078c8d6e5",
-        "version" : "12.16.0"
+        "revision" : "346daa9f46316aa372b35b317e18224acc2e9063",
+        "version" : "12.18.0"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "ce606e3768abddff0510783e1a6d2f270b943b35",
-        "version" : "12.16.0"
+        "revision" : "f04760d460296cc0fa430935a7be212e5bd67fc5",
+        "version" : "12.18.0"
       }
     },
     {

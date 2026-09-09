@@ -35,6 +35,7 @@ class FirebaseNotificationPresenter(
     private val applicationContext = context.applicationContext
 
     fun createChannel() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
         val manager = applicationContext.getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(
             NotificationChannel(
@@ -111,13 +112,19 @@ fun Context.canPostFirebaseNotifications(channelId: String): Boolean {
     } else {
         true
     }
-    val channelImportance = appContext.getSystemService(NotificationManager::class.java)
-        ?.getNotificationChannel(channelId)
-        ?.importance
+    val channelsSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+    val channelImportance = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        appContext.getSystemService(NotificationManager::class.java)
+            ?.getNotificationChannel(channelId)
+            ?.importance
+    } else {
+        null
+    }
     return firebaseNotificationDeliveryAllowed(
         runtimePermissionGranted = runtimePermissionGranted,
         appNotificationsEnabled = NotificationManagerCompat.from(appContext).areNotificationsEnabled(),
         channelImportance = channelImportance,
+        channelsSupported = channelsSupported,
     )
 }
 
@@ -125,7 +132,8 @@ internal fun firebaseNotificationDeliveryAllowed(
     runtimePermissionGranted: Boolean,
     appNotificationsEnabled: Boolean,
     channelImportance: Int?,
+    channelsSupported: Boolean = true,
 ): Boolean = runtimePermissionGranted &&
     appNotificationsEnabled &&
-    channelImportance != null &&
-    channelImportance != NotificationManager.IMPORTANCE_NONE
+    (!channelsSupported ||
+        (channelImportance != null && channelImportance != NotificationManager.IMPORTANCE_NONE))

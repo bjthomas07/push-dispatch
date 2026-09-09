@@ -3,7 +3,7 @@ agp = "8.13.2"
 kotlin = "2.3.21"
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.15.0" }
-firebase-messaging = { module = "com.google.firebase:firebase-messaging", version = "25.0.1" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version = "25.1.2" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.9.0" }
 junit = { module = "junit:junit", version = "4.13.2" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.9.0" }

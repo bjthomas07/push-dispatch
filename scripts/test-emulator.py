@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run Go integration tests against a disposable, checksum-pinned emulator."""
+"""Run Go tests, or a supplied command, against a disposable Firestore emulator."""
+import argparse
 import hashlib
 import os
 from pathlib import Path
@@ -12,6 +13,12 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "1.20.2"
 SHA256 = "4a117fc297b1441eac1b7756e80442e86ef88865b9e3caf6f59eabf83da574f8"
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--cwd", type=Path, default=ROOT)
+parser.add_argument("command", nargs=argparse.REMAINDER)
+args = parser.parse_args()
+command = args.command[1:] if args.command[:1] == ["--"] else args.command
+command = command or ["go", "test", "-race", "-count=1", "./..."]
 jar = ROOT / ".build" / "tools" / f"cloud-firestore-emulator-v{VERSION}.jar"
 jar.parent.mkdir(parents=True, exist_ok=True)
 if not jar.exists():
@@ -44,7 +51,7 @@ with tempfile.TemporaryFile() as log:
             except OSError:
                 time.sleep(0.2)
         result = subprocess.run(
-            ["go", "test", "-race", "-count=1", "./..."], cwd=ROOT,
+            command, cwd=args.cwd,
             env={**os.environ, "FIRESTORE_EMULATOR_HOST": f"127.0.0.1:{port}"},
         )
         raise SystemExit(result.returncode)

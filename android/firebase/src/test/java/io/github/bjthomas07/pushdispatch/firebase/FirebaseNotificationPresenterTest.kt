@@ -70,6 +70,22 @@ class FirebaseNotificationPresenterTest {
     }
 
     @Test
+    fun `Android before Oreo uses app permission without requiring a channel`() {
+        assertTrue(firebaseNotificationDeliveryAllowed(
+            runtimePermissionGranted = true,
+            appNotificationsEnabled = true,
+            channelImportance = null,
+            channelsSupported = false,
+        ))
+        assertFalse(firebaseNotificationDeliveryAllowed(
+            runtimePermissionGranted = true,
+            appNotificationsEnabled = false,
+            channelImportance = null,
+            channelsSupported = false,
+        ))
+    }
+
+    @Test
     fun `collapse key keeps retry presentation identity stable`() {
         val first = message(
             messageId = "delivery-1",

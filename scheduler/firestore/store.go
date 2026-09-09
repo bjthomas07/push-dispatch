@@ -30,7 +30,13 @@ type Store struct {
 
 // New namespaces every schedule under an app document, e.g. apps/my-app.
 func New(client *firestore.Client, app *firestore.DocumentRef) *Store {
-	return &Store{client: client, jobs: app.Collection(Collection)}
+	return NewWithCollection(client, app.Collection(Collection))
+}
+
+// NewWithCollection uses an application-owned schedule collection. Its indexes
+// and client access rules must satisfy the same contract as the default layout.
+func NewWithCollection(client *firestore.Client, jobs *firestore.CollectionRef) *Store {
+	return &Store{client: client, jobs: jobs}
 }
 
 func (s *Store) Put(ctx context.Context, job scheduler.Job) error {
