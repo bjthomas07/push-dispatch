@@ -4,7 +4,10 @@ Self-hosted mobile push notifications and scheduled reminders. Go on the server,
 Swift and Kotlin on devices. FCM delivers; your infrastructure owns registration,
 schedules, and delivery state.
 
-**Early development · MIT licensed · repository currently private.**
+**Early development · MIT licensed.**
+
+**[Send your first reminder](docs/quickstart.md)** — register a device, send a push,
+and create and cancel a daily schedule in your own Firebase test project.
 
 - Native registration, token/FID refresh, permission sync, 24-hour heartbeats,
   and account-safe unbinding.
@@ -16,6 +19,8 @@ schedules, and delivery state.
 
 ```sh
 # Go 1.26.6, or install the pinned tools with mise
+git clone https://github.com/bjthomas07/push-dispatch.git
+cd push-dispatch
 mise trust
 mise install
 mise run test
@@ -23,23 +28,20 @@ mise run build
 ./bin/push-dispatch --help
 ```
 
-```sh
-export GOOGLE_CLOUD_PROJECT=your-project
-export PUSH_APP=your-app
-gcloud auth application-default login
-./bin/push-dispatch serve
-```
+The [quickstart](docs/quickstart.md) covers credentials, registration, and expected
+results. `serve` runs the device API; `tick` processes due schedules. A recurring
+worker is needed to deliver reminders when this terminal is closed.
 
-Register a device through the authenticated API, then schedule a reminder:
-
-```sh
-./bin/push-dispatch schedule < examples/daily.json
-./bin/push-dispatch tick
-```
-
-[Usage and JSON](docs/usage.md) · [Apple](apple/README.md) ·
+[Runnable Go example](examples/send/main.go) · [Usage and JSON](docs/usage.md) · [Apple](apple/README.md) ·
 [Android](android/README.md) · [GCP deployment](docs/gcp.md) ·
+[Troubleshooting](docs/troubleshooting.md) ·
 [Storage and delivery guarantees](docs/architecture.md) · [Contributing](CONTRIBUTING.md)
+
+Go and Swift consumers can pin a reviewed commit; there are no release tags yet.
+Android is distributed as source modules or locally built AARs. Automated Go,
+Android, and iOS tests run in [CI](https://github.com/bjthomas07/push-dispatch/actions/workflows/ci.yml).
+Production throughput and physical-device delivery have not been validated for
+this extracted release; verify them in your app before enabling real users.
 
 ## Why this exists
 

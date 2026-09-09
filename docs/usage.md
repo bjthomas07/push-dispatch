@@ -2,9 +2,23 @@
 
 ## Go library
 
-While the repository is private, authenticate Git with GitHub and set
-`GOPRIVATE=github.com/bjthomas07/*` before resolving it. No release tag is published
-yet; pin a reviewed commit. The Go module lives at the repository root.
+The public Go module lives at the repository root. No release tag is published
+yet; pin a reviewed commit from the repository history:
+
+```sh
+go get github.com/bjthomas07/push-dispatch@FULL_REVIEWED_COMMIT
+```
+
+For a complete program with imports, target lookup, partial-failure handling, and
+invalid-token cleanup, see [the send example](../examples/send/main.go). After
+[registering a device](quickstart.md), run it from the checkout:
+
+```sh
+# Uses GOOGLE_CLOUD_PROJECT, PUSH_APP, PUSH_USER_ID, and server ADC credentials.
+mise run example-send
+```
+
+The following excerpt shows just the dispatch call:
 
 ```go
 sender, err := fcm.New(ctx, projectID)

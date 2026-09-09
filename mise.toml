@@ -9,7 +9,10 @@ run = "go vet ./..."
 [tasks.build]
 run = "go build -o bin/push-dispatch ./cmd/push-dispatch"
 [tasks.fmt]
-run = "gofmt -w push scheduler api cmd"
+run = "gofmt -w push scheduler api cmd examples"
+[tasks.example-send]
+description = "Send one real notification to PUSH_USER_ID using the Go library"
+run = "go run ./examples/send"
 [tasks.android-test]
 dir = "android"
 run = "./gradlew :notifications-core:testDebugUnitTest :notifications-firebase:testDebugUnitTest"

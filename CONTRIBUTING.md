@@ -23,6 +23,10 @@ Android requires SDK platform 36 and build-tools 35.0.0, with `ANDROID_HOME` set
 Apple tests require Xcode and an iOS simulator; set `IOS_DESTINATION` if needed.
 Emulator tests use only `demo-push-dispatch` and skip in the ordinary Go suite when
 `FIRESTORE_EMULATOR_HOST` is absent. `test-emulator` starts an isolated local emulator.
+The Go suite also compiles `examples/send` and its emulator cases verify that
+missing devices do not trigger a send and partial failures retire only unregistered
+targets. `mise run example-send` itself sends a real notification and requires the
+[quickstart setup](docs/quickstart.md); it is not an offline test command.
 
 Tests must cover behavior: target rotation, failed logout, owner-safe cleanup,
 concurrent claims, expired leases, partial sends, retries, cancellation, and DST.

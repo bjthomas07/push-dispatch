@@ -18,7 +18,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21.0.2+13.0.LTS'
-      - run: test -z "$(gofmt -l push scheduler api cmd)"
+      - run: test -z "$(gofmt -l push scheduler api cmd examples)"
       - run: go vet ./...
       - run: python3 scripts/test-emulator.py
       - run: go build ./cmd/push-dispatch

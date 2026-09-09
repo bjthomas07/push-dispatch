@@ -65,7 +65,8 @@ gcloud run deploy push-api --image "$PUSH_IMAGE" --region "$PUSH_REGION" \
 
 gcloud run jobs deploy push-worker --image "$PUSH_IMAGE" --region "$PUSH_REGION" \
   --project "$PUSH_PROJECT" --service-account="push-worker@$PUSH_PROJECT.iam.gserviceaccount.com" \
-  --args=tick,--limit,100 --tasks=1 --parallelism=1 --max-retries=0 --task-timeout=600s \
+  --args=tick,--limit,100 --tasks=1 --parallelism=1 --cpu=1 --memory=512Mi \
+  --max-retries=0 --task-timeout=600s \
   --set-env-vars="GOOGLE_CLOUD_PROJECT=$PUSH_PROJECT,PUSH_APP=$PUSH_APP"
 
 gcloud run jobs add-iam-policy-binding push-worker --region "$PUSH_REGION" \
@@ -90,13 +91,53 @@ Overlapping executions share transactional claims. A terminated execution's
 unfinished claim becomes eligible after its lease expires. Deploy immutable image
 digests for subsequent releases and verify indexes are ready before enabling ticks.
 
+## Cost and capacity before enabling the cron job
+
+Cloud Run Jobs bill at least one minute **per task**, including an empty tick.
+With the resource settings above, one task each minute for 30 days has a worker
+floor of about **$49.25 before free allowances** at the September 8, 2026
+`us-central1` rates. The calculation is `43,200 × 60 × (0.000018 + 0.5 × 0.000002)`.
+Thirty-two tasks each minute raise that floor to about **$1,575.94**, before other
+services. Longer executions and retries add runtime. These are worker billing
+floors, not an estimate of total operating cost or measured capacity.
+[Cloud Run pricing](https://cloud.google.com/run/pricing).
+
+Estimate Firestore usage from the actual operations:
+
+| Normal operation, without retries/pruning | Document reads | Document writes |
+|---|---:|---:|
+| Register one device | 2 | 2 |
+| Heartbeat for an existing device | 1 | 1 |
+| Create/replace a schedule through the CLI | 0 | 1 |
+| Process one successful daily occurrence | 4 | 2 |
+
+The occurrence includes its query, claim transaction, user lookup, and finish
+transaction. Finishing advances the existing schedule to the next local day.
+Empty queries cost at least one read; 32 end-of-shard polls per minute contribute
+up to roughly 1.38 million reads per 30 days. Transaction retries, ownership changes,
+invalid-target cleanup, and optional deletion fences add operations. Use the rates
+for your actual database location and available free quota.
+[Firestore billing](https://cloud.google.com/firestore/pricing).
+
+`--limit 100` applies per shard, so an invocation is capped at 3,200 claimed jobs
+across all 32 shards. Processing is sequential inside each task. Measure oldest
+due time, elapsed time per job, and provider quota errors before increasing task
+count or the limit (maximum 1,000 per shard). The 500-target dispatcher batch limit
+does not combine 500 different users' scheduled jobs into one batch.
+
 FCM is currently listed as no-cost; Firestore reads/writes, Cloud Run, Scheduler,
 Artifact Registry, build minutes, logs, and network usage have separate costs.
 There is no promise that operating this stack is free at any scale.
 [Firebase pricing](https://firebase.google.com/pricing).
+
+## Verify delivery
 
 After deployment, validate token/FID registration, foreground/background display,
 taps, permission changes, logout/account switches, and a scheduled occurrence on
 physical Android and iOS devices. Simulator/emulator tests cannot verify production
 FCM/APNs credentials or delivery. No production deployment was performed as part
 of the initial extraction.
+
+Use the [quickstart](quickstart.md) for a first device and the
+[troubleshooting guide](troubleshooting.md) to diagnose registration, scheduling,
+and presentation separately.
